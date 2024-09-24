@@ -1,16 +1,13 @@
 import openai
-import os
-from dotenv import load_dotenv
-
-
-# Load environment variables from .env file
-load_dotenv()
-
 # from openai import OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# Your OpenAI API Key
+# client = OpenAI()
+# client.api_key = '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'
 
 
-# openai.api_key = 'sk-iGJYrpebv5CTfqtVIzYBQGln4lkjj8tVVYE3KuuNy8T3BlbkFJPEl5BCJRVNEfRVvWvaaAMAUzPP8quaIFL_cciiuRUA'
+openai.api_key = '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'
+#  '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'
 
 
 # Function to summarize the article in layman terms
