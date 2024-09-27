@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import JSONResponse
+from starlette.requests import Request
+
 from pydantic import BaseModel
 from test_gpt import sum_chi_article
 
@@ -39,3 +42,8 @@ async def modify_article_endpoint(input: ArticleInput):
     modified_text = modify_article(input.text)
     # Return the modified article
     return {"modified_article": modified_text}
+
+
+@app.options("/modify-article/")
+async def preflight_handler(request: Request):
+    return JSONResponse(status_code=200)
