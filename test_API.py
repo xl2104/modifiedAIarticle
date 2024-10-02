@@ -19,7 +19,6 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
-app.
 
 
 # Define a Pydantic model to handle the input
