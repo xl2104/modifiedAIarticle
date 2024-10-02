@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
+
+# from fastapi.middleware.cors import CORSMiddleware
 # from starlette.responses import JSONResponse
 # from starlette.requests import Request
 
@@ -17,6 +19,7 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
+app.
 
 
 # Define a Pydantic model to handle the input
