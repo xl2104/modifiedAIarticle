@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import JSONResponse
-from starlette.requests import Request
+# from starlette.responses import JSONResponse
+# from starlette.requests import Request
 
 from pydantic import BaseModel
 from test_gpt import sum_chi_article
@@ -10,13 +10,13 @@ from test_gpt import sum_chi_article
 app = FastAPI()
 
 # Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # Allows all origins
+#     allow_credentials=True,
+#     allow_methods=["*"],  # Allows all methods
+#     allow_headers=["*"],  # Allows all headers
+# )
 
 # Define a Pydantic model to handle the input
 
@@ -44,6 +44,6 @@ async def modify_article_endpoint(input: ArticleInput):
     return {"modified_article": modified_text}
 
 
-@app.options("/modify-article/")
-async def preflight_handler(request: Request):
-    return JSONResponse(status_code=200)
+# @app.options("/modify-article/")
+# async def preflight_handler(request: Request):
+#     return JSONResponse(status_code=200)
