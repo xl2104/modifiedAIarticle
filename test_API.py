@@ -10,16 +10,16 @@ from test_gpt import sum_chi_article
 app = FastAPI()
 
 # Add CORS middleware
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # Allows all origins
-#     allow_credentials=True,
-#     allow_methods=["*"],  # Allows all methods
-#     allow_headers=["*"],  # Allows all headers
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 # Define a Pydantic model to handle the input
-
 
 class ArticleInput(BaseModel):
     text: str
@@ -41,7 +41,8 @@ async def modify_article_endpoint(input: ArticleInput):
     # Modify the article using the modify_article function
     modified_text = modify_article(input.text)
     # Return the modified article
-    return {"modified_article": modified_text}
+    return {"original article": input.text,
+            "modified_article": modified_text}
 
 
 # @app.options("/modify-article/")
