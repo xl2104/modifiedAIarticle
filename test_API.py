@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 # from fastapi.middleware.cors import CORSMiddleware
 # from starlette.responses import JSONResponse
@@ -11,6 +11,11 @@ from test_gpt import sum_chi_article
 # Create a FastAPI instance
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+]
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +23,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
+    max_age=86400
 )
 
 
