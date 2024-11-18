@@ -14,13 +14,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 # Function to summarize the article in layman terms
-
-
-# Function to summarize the article in layman terms
 def sum_article(text):
 
     response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",  # or "gpt-3.5-turbo"
+        model="gpt-4o",  # or "gpt-3.5-turbo"
         messages=[
             # {"role": "system", "content": "You are a helpful assistant that simplifies medical articles into easy-to-understand language for non-medical users."},
             {"role": "user",
@@ -37,15 +34,15 @@ def sum_article(text):
 def sum_chi_article(text):
 
     response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",  # or "gpt-3.5-turbo"
+        model="gpt-4o",  # or "gpt-3.5-turbo"
         messages=[
             # {"role": "system", "content": "You are a helpful assistant that simplifies medical articles into easy-to-understand language for non-medical users."},
             {"role": "user",
              #  "content": f"explain the following medical report in Chinese to a layman, explain all the jargons so that none-professional people would understand:\n\n{text}"
-             "content": f"请对以下报告进行解释，尤其里面的术语和检查单位，请给到正常范围和目前检查结果的临床意义。 请用通俗易懂的文字表述: \n\n{text}"
+             "content": f"请对以下报告进行解释，不超过600个字，尤其里面的专业术语，请给到正常范围和目前检查结果的临床意义。 请用通俗易懂的文字表述: \n\n{text}"
              }
         ],
-        max_tokens=300,  # Limit to a short summary
+        max_tokens=600,  # Limit to a short summary
         temperature=0.4  # Controls creativity; lower is more factual
     )
 
@@ -66,24 +63,21 @@ Treatment involves lifestyle modifications and pharmacological interventions, su
 """
 
 chinese_text = """
-海马体积【MTA评分]
-    影像所见:
-    全脑萎缩[GCA评分]: 1分脑室系统未见确切扩张。
-    海马体积MTA评分: 左侧海马1分，右侧海马1分，双侧海马和岛叶信号未见确切异常。脑微出血: 无。
-    颅内未见确切皮层表面铁沉积。
-    白质高信号【Fazekas评分]: 脑室周围白质1分，深部白质1分。脑血流灌注未见确切特异性改变。总结意见:
-    脑萎缩: 脑白质高信号，Fazekas1级。
+海马体积【MTA评分]影像所见:全脑萎缩[GCA评分]: 1分脑室系统未见确切扩张。海马体积MTA评分: 左侧海马1分，右侧海马1分，双侧海马和岛叶信号未见确切异常。脑微出血: 无。
+颅内未见确切皮层表面铁沉积。白质高信号【Fazekas评分]: 脑室周围白质1分，深部白质1分。脑血流灌注未见确切特异性改变。总结意见:脑萎缩: 脑白质高信号，Fazekas1级。
 """
 
 # Get summary
 summary = sum_chi_article(chinese_text)
 print("输入文字，开始智能解读... ...")
+print("original:", chinese_text)
+print("modified:", summary)
 
 
 def trans_summary(article):
 
     response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",  # or "gpt-3.5-turbo"
+        model="gpt-4o",  # or "gpt-3.5-turbo"
         messages=[
             # {"role": "system", "content": "You are a helpful assistant that simplifies medical articles into easy-to-understand language for non-medical users."},
             {"role": "user",
